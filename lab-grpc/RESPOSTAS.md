@@ -1,0 +1,9 @@
+# Parte A
+
+## 4.1 Sobre o repositório de revisão de redes
+
+1. O endereço do servidor estava escrito diretamente no código do cliente do TCP (localhost), UDP (localhost), Multicast (230.0.0.1) e WebSocket (localhost). Isso prejudica diretamente a transparência de localização, pois, em um sistema distribuído com transparência de localização, o cliente não deveria precisar saber onde o servidor está fisicamente hospedado para conseguir usá-lo. Assim, fixar o IP e a porta no código gera acoplamento com a máquina onde o servidor está executando, prejudicando a transparência.
+
+2. Para perguntar algo ao servidor, o cliente precisa montar uma string de texto manualmente sim, e isso indica a ausência de transparência de acesso. A transparência de acesso significa que chamar uma função remota deveria parecer igual a chamar uma função local do próprio programa, entretanto, nas quatro soluções, teve que formatar manualmente as strings e, do lado do servidor, teve que fazer a leitura e as verificações do texto, fazendo com que todo o detalhe de transporte e montagem de mensagem ficasse exposto para o desenvolvedor.
+
+3. Se o servidor mudasse de máquina amanhã, o cliente no TCP, UDP e WebSocket parariam de funcionar, pois eles tentariam se conectar ao endereço antigo (localhost) e receberiam erros de conexão recusada ou ficariam travados esperando resposta. A única solução que sobreviveria sem alterar o código do cliente é a de Multicast. Isso acontece porque o cliente multicast não se conecta ao endereço IP físico da máquina do servidor, mas sim a um endereço IP de grupo (230.0.0.1). Assim, se o servidor fosse transferido para outro computador dentro da mesma rede local e continuasse mandando mensagens para o mesmo grupo, os clientes continuariam recebendo os avisos normalmente, sem precisar mudar alguma linha de código.
