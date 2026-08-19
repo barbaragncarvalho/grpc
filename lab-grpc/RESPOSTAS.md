@@ -13,3 +13,13 @@
 1. Dentre os 8 tipos de transparência, a mais visível para o programador que está usando um serviço remoto é a transparência de acesso, já que ela está ligada diretamente à forma como o código é escrito. Isso porque, quando há transparência de acesso, o programador somente chama os métodos que precisa, sem ter que lidar com a comunicação de rede por trás. Sem ela, ele teria que escrever várias linhas de código a mais só para interpretar as mensagens trocadas.
 
 2. Transparência total nem sempre é desejável. Um exemplo é quando, por esconder que uma operação é remota, o programador coloca essa operação dentro de um laço de repetição for que será executado milhares de vezes. Assim, o programa irá demorar muito tempo para responder (latência), já que a cada iteração os dados terão que viajar pela rede inteira, diferentemente de uma operação local, que é rápida por se consultar os dados na memória.
+
+# Parte B
+
+## 5.5
+
+1. A vantagem de ter esse contrato explícito e gerado automaticamente é a eliminação dos erros manuais, já que, quando se define o formato por comentários, qualquer pequeno erro de digitação ou diferença de maiúsculas e minúsculas faz dar erro na comunicação. Enquanto isso, com o arquivo .proto, é validado os tipos de dados e nomes de campos antes de rodar, além do compilador gerar todo o código automaticamente.
+
+2. O mesmo arquivo central.proto ter gerado o código para diferentes linguagens sugere que, em sistemas distribuídos reais, cada equipe pode escolher a linguagem de programação mais adequada para o seu serviço em específico, de forma que tudo continue se comunicando perfeitamente.
+
+3. Mesmo sem entender todo o código gerado, é possível identificar onde ficam definidas as operações ConsultarHorario e AcompanharAvisos (linhas 52 e 59). Uma classe que pude reconhecer é a CentralAtendimentoServicer, que contém os métodos ConsultarHorario e AcompanharAvisos.
